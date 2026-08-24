@@ -1,0 +1,40 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "eSAULOG",
+      "hasCanvas": false,
+      "bodyTextLen": 1017,
+      "bodyTextHash": "27fc4cc2b078552d7d8de3d0e52c75737bb9df6dad65d63fd890536ede5c2921",
+      "bodyTextPrefix": "eSAULOG Product Packages Websites Apply Gate Sign in TUKODPH · E",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "eSAULOG",
+      "hasCanvas": false,
+      "bodyTextLen": 1588,
+      "bodyTextHash": "dd75536842faaf9b3521fe1c0a18231a4660775c29244f0feaf0adbecd7d1f5a",
+      "bodyTextPrefix": "eSAULOG Sign in Product Packages Websites Apply TUKODPH · ESAULO",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": true,
+  "baselineReasons": [
+    "mobile: body text changed (1012 -> 1588 chars, hash mismatch)"
+  ]
+}

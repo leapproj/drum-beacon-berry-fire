@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "eSAULOG",
+      "hasCanvas": false,
+      "bodyTextLen": 1593,
+      "bodyTextHash": "373857042968eaa978662adfd5d12e7e0640fd675d06091869e3fc3973e16b4b",
+      "bodyTextPrefix": "eSAULOG Product Packages Websites Apply Gate Sign in TUKODPH · E",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "eSAULOG",
+      "hasCanvas": false,
+      "bodyTextLen": 1588,
+      "bodyTextHash": "dd75536842faaf9b3521fe1c0a18231a4660775c29244f0feaf0adbecd7d1f5a",
+      "bodyTextPrefix": "eSAULOG Sign in Product Packages Websites Apply TUKODPH · ESAULO",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
