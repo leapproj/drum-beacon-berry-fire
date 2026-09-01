@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { HQ_NAV, HqOperatorStrip } from "@/components/hq-chrome";
 import { SspGate } from "@/components/operator-gate";
 import { TopBar } from "@/components/shell";
 
@@ -10,18 +11,7 @@ function SspLayout() {
   return (
     <SspGate>
       <div className="min-h-screen">
-        <TopBar
-          kicker="Solution System Portal"
-          items={[
-            { to: "/hub", label: "Desk" },
-            { to: "/ssp", label: "Overview" },
-            { to: "/ssp/festivals", label: "Tenants" },
-            { to: "/ssp/applications", label: "Applications" },
-            { to: "/ssp/analytics", label: "Economics" },
-            { to: "/ssp/organizations", label: "Organizations" },
-            { to: "/ssp/users", label: "Users" },
-          ]}
-        />
+        <TopBar kicker="TukodPH Super Admin HQ" items={HQ_NAV} trailing={<HqOperatorStrip />} />
         <Outlet />
       </div>
     </SspGate>

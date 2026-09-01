@@ -7,9 +7,9 @@
       "status": 200,
       "title": "eSAULOG",
       "hasCanvas": false,
-      "bodyTextLen": 1017,
-      "bodyTextHash": "27fc4cc2b078552d7d8de3d0e52c75737bb9df6dad65d63fd890536ede5c2921",
-      "bodyTextPrefix": "eSAULOG Product Packages Websites Apply Gate Sign in TUKODPH · E",
+      "bodyTextLen": 1054,
+      "bodyTextHash": "b0828d603d5a89b46b6ec1c84194000f072aa198308ba14dbb5d5db308cea148",
+      "bodyTextPrefix": "eSAULOG Product Packages Festivals Websites Apply Sign in TUKODP",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
@@ -21,9 +21,9 @@
       "status": 200,
       "title": "eSAULOG",
       "hasCanvas": false,
-      "bodyTextLen": 1588,
-      "bodyTextHash": "dd75536842faaf9b3521fe1c0a18231a4660775c29244f0feaf0adbecd7d1f5a",
-      "bodyTextPrefix": "eSAULOG Sign in Product Packages Websites Apply TUKODPH · ESAULO",
+      "bodyTextLen": 1054,
+      "bodyTextHash": "22cd4d5ea8b068da4c63376efac524cf0eb3567926682499f3e45ffa5d76298c",
+      "bodyTextPrefix": "eSAULOG Sign in Product Packages Festivals Websites Apply TUKODP",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
@@ -32,9 +32,5 @@
   },
   "brandWarnings": [],
   "authWarnings": [],
-  "verdictFile": "/workspace/screenshots/app-builder-built.json",
-  "divergesFromBaseline": true,
-  "baselineReasons": [
-    "mobile: body text changed (1012 -> 1588 chars, hash mismatch)"
-  ]
+  "verdictFile": "/workspace/screenshots/app-builder-built.json"
 }

@@ -564,10 +564,11 @@ export async function runErpSeed(sql: Sql) {
 }
 
 export async function runOperatorSeed(sql: Sql) {
+  await sql.query(`alter table operator_accounts add column if not exists last_seen_at timestamptz`);
   const accounts = [
-    { id: "op_ssp_van", username: "tukodph_van", pass: "926324", kind: "ssp", display_name: "Van · TukodPH", organization_name: "TukodPH", contact_email: "van@tukodph.com" },
-    { id: "op_ssp_lanz", username: "tukodph_lanz", pass: "123456", kind: "ssp", display_name: "Lanz · TukodPH", organization_name: "TukodPH", contact_email: "lanz@tukodph.com" },
-    { id: "op_ssp_marc", username: "tukodph_marc", pass: "000000", kind: "ssp", display_name: "Marc · TukodPH", organization_name: "TukodPH", contact_email: "marc@tukodph.com" },
+    { id: "op_ssp_van", username: "tukodph_van", pass: "926324", kind: "ssp", display_name: "Van Zambrano", organization_name: "TukodPH", contact_email: "van@tukodph.com" },
+    { id: "op_ssp_lanz", username: "tukodph_lanz", pass: "123456", kind: "ssp", display_name: "Lanz", organization_name: "TukodPH", contact_email: "lanz@tukodph.com" },
+    { id: "op_ssp_marc", username: "tukodph_marc", pass: "000000", kind: "ssp", display_name: "Marc", organization_name: "TukodPH", contact_email: "marc@tukodph.com" },
     { id: "op_higalaay", username: "higalaay", pass: "higalaay2026", kind: "tenant", display_name: "Higalaay Command", organization_name: "Cagayan de Oro City", contact_email: "higalaay@cdo.gov.ph" },
     { id: "op_diyandi", username: "diyandi", pass: "diyandi2026", kind: "tenant", display_name: "Diyandi Command", organization_name: "Iligan City", contact_email: "diyandi@iligan.gov.ph" },
     { id: "op_lanzones", username: "lanzones", pass: "lanzones2026", kind: "tenant", display_name: "Lanzones Command", organization_name: "Province of Camiguin", contact_email: "lanzones@camiguin.gov.ph" },
@@ -601,6 +602,17 @@ export async function runOperatorSeed(sql: Sql) {
       `insert into festival_members (festival_id, user_id, role) values ($1,$2,'admin') on conflict do nothing`,
       [festivalId, userId],
     );
+  }
+
+  const allFestivals = await sql.query<{ id: string }>(`select id from festivals`);
+  const sspOps = await sql.query<{ id: string }>(`select id from operator_accounts where kind = 'ssp'`);
+  for (const f of allFestivals) {
+    for (const op of sspOps) {
+      await sql.query(
+        `insert into festival_members (festival_id, user_id, role) values ($1,$2,'admin') on conflict do nothing`,
+        [f.id, op.id],
+      );
+    }
   }
 
   await insert(sql, "staff_members", [

@@ -81,6 +81,7 @@ export const signInTenant = createServerFn({ method: "POST" })
     if (!row || row.kind !== "tenant" || !verifyPass(data.password, row.pass_hash)) {
       throw new Error("Invalid ID or passkey");
     }
+    await sql.query(`update operator_accounts set last_seen_at = now() where id = $1`, [row.id]);
     return issue(row);
   });
 
@@ -101,6 +102,7 @@ export const signInSsp = createServerFn({ method: "POST" })
     if (!row || row.kind !== "ssp" || !verifyPass(data.password, row.pass_hash)) {
       throw new Error("Invalid operator credentials");
     }
+    await sql.query(`update operator_accounts set last_seen_at = now() where id = $1`, [row.id]);
     return issue(row);
   });
 

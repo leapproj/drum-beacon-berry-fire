@@ -86,7 +86,7 @@ export function OperatorHomeLink() {
     return (
       <Link to="/ssp">
         <span className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-fg">
-          SSP
+          Headquarters
         </span>
       </Link>
     );

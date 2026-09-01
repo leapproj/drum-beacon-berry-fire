@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSql, type Sql } from "@/lib/db";
 import { newId } from "@/lib/ids";
 import { tenantMiddleware as MW } from "./operator-auth";
-import { audit, requireFestivalMember, requireSsp, isSsp } from "./helpers";
+import { audit, requireFestivalMember, requireSsp, isSsp, grantSspOperators } from "./helpers";
 import { ensureSeed } from "./seed";
 
 export const PLAN_KEYS = [
@@ -95,6 +95,7 @@ async function provisionFestival(sql: Sql, opts: any) {
 		opts.ends_on || '2026-11-08',
 	]);
 	await sql.query<any>(`insert into festival_members (festival_id, user_id, role) values ($1,$2,'admin') on conflict do nothing`, [id, opts.userId]);
+	await grantSspOperators(sql, id);
 	const pageId = newId("pg");
 	await sql.query<any>(`insert into festival_pages (id, festival_id, slug, title, body, published)
      values ($1,$2,'home',$3,'Draft website. Open the CMS to build blocks.', false)`, [

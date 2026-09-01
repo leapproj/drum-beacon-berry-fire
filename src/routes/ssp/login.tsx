@@ -21,14 +21,18 @@ function SspLogin() {
     },
   });
   return (
-    <main className="grid min-h-screen place-items-center px-4 py-12">
+    <main className="sunburst grid min-h-screen place-items-center px-4 py-12">
       <div className="w-full max-w-sm">
         <Link to="/" className="mb-8 flex items-center gap-2 text-muted">
           <EsaulogMark className="size-8" />
-          <span className="font-display text-2xl text-fg">eSAULOG SSP</span>
+          <span className="font-display text-2xl text-fg">eSAULOG</span>
         </Link>
-        <h1 className="font-display text-3xl tracking-tight">Solution System Portal</h1>
-        <p className="mt-2 text-sm text-muted">TukodPH operator access only.</p>
+        <p className="text-xs tracking-[0.2em] text-muted uppercase">TukodPH Super Admin HQ</p>
+        <h1 className="mt-2 font-display text-3xl tracking-tight">Headquarters</h1>
+        <p className="mt-2 text-sm text-muted">
+          Solution System Portal. Assigned TukodPH operators only. Enter your User ID and passkey.
+          Festival tenants cannot enter this door.
+        </p>
         <form
           className="mt-8 grid gap-3"
           onSubmit={(e) => {
@@ -61,9 +65,15 @@ function SspLogin() {
             <p className="text-sm text-danger">{(mut.error as Error).message}</p>
           ) : null}
           <Button type="submit" disabled={mut.isPending}>
-            {mut.isPending ? "Verifying…" : "Enter SSP"}
+            {mut.isPending ? "Verifying…" : "Enter Headquarters"}
           </Button>
         </form>
+        <p className="mt-6 text-sm text-muted">
+          Festival organizer?{" "}
+          <Link to="/login" className="text-fg underline-offset-4 hover:underline">
+            Tenant sign in
+          </Link>
+        </p>
       </div>
     </main>
   );

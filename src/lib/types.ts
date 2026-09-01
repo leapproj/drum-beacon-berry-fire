@@ -1,4 +1,4 @@
-export type FestivalStatus = "LIVE" | "SETUP" | "DRAFT" | "PLANNING";
+export type FestivalStatus = "LIVE" | "SETUP" | "DRAFT" | "PLANNING" | "ENDED";
 export type EventType = "physical" | "digital" | "hybrid";
 export type EventStatus = "draft" | "published" | "live" | "completed";
 

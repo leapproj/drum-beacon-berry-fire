@@ -13,9 +13,16 @@ export function compact(n: number) {
 }
 
 export function asDate(value: string | Date) {
-  if (value instanceof Date) return value;
-  const iso = value.includes("T") ? value : `${value}T00:00:00`;
-  return parseISO(iso);
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? new Date(0) : value;
+  }
+  const raw = String(value ?? "").trim();
+  if (!raw) return new Date(0);
+  const normalized = raw.includes("T") ? raw : raw.replace(" ", "T");
+  const parsed = parseISO(normalized);
+  if (!Number.isNaN(parsed.getTime())) return parsed;
+  const fallback = new Date(raw);
+  return Number.isNaN(fallback.getTime()) ? new Date(0) : fallback;
 }
 
 export function dayLabel(value: string | Date) {
@@ -43,4 +50,11 @@ export function isoText(value: unknown): string {
   if (value instanceof Date) return value.toISOString();
   if (typeof value === "string") return value;
   return String(value ?? "");
+}
+
+export function stampLabel(value: string | Date | null | undefined) {
+  if (!value) return "Never";
+  const d = asDate(value);
+  if (d.getTime() === 0) return "Never";
+  return format(d, "d MMM yyyy, h:mm a");
 }

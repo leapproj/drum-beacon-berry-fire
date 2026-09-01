@@ -29,8 +29,10 @@ import { Route as FestivalsSlugRouteImport } from './routes/festivals/$slug'
 import { Route as SspIndexRouteImport } from './routes/ssp/index'
 import { Route as SspAnalyticsRouteImport } from './routes/ssp/analytics'
 import { Route as SspApplicationsRouteImport } from './routes/ssp/applications'
-import { Route as SspFestivalsRouteImport } from './routes/ssp/festivals'
+import { Route as SspEventsRouteImport } from './routes/ssp/events'
+import { Route as SspFestivalsRouteRouteImport } from './routes/ssp/festivals/route'
 import { Route as SspLoginRouteImport } from './routes/ssp/login'
+import { Route as SspNetworkRouteImport } from './routes/ssp/network'
 import { Route as SspOrganizationsRouteImport } from './routes/ssp/organizations'
 import { Route as SspUsersRouteImport } from './routes/ssp/users'
 import { Route as AdminFestivalIdIndexRouteImport } from './routes/admin/$festivalId/index'
@@ -46,7 +48,8 @@ import { Route as AdminFestivalIdPublishRouteImport } from './routes/admin/$fest
 import { Route as AdminFestivalIdStaffRouteImport } from './routes/admin/$festivalId/staff'
 import { Route as AdminFestivalIdVenuesRouteImport } from './routes/admin/$festivalId/venues'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as SspFestivalsFestivalIdRouteImport } from './routes/ssp/festivals.$festivalId'
+import { Route as SspFestivalsIndexRouteImport } from './routes/ssp/festivals/index'
+import { Route as SspFestivalsFestivalIdRouteImport } from './routes/ssp/festivals/$festivalId'
 import { Route as AdminFestivalIdEventsEventIdRouteImport } from './routes/admin/$festivalId/events.$eventId'
 import { Route as AdminFestivalIdEventsNewRouteImport } from './routes/admin/$festivalId/events.new'
 
@@ -150,7 +153,12 @@ const SspApplicationsRoute = SspApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => SspRouteRoute,
 } as any)
-const SspFestivalsRoute = SspFestivalsRouteImport.update({
+const SspEventsRoute = SspEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => SspRouteRoute,
+} as any)
+const SspFestivalsRouteRoute = SspFestivalsRouteRouteImport.update({
   id: '/festivals',
   path: '/festivals',
   getParentRoute: () => SspRouteRoute,
@@ -158,6 +166,11 @@ const SspFestivalsRoute = SspFestivalsRouteImport.update({
 const SspLoginRoute = SspLoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => SspRouteRoute,
+} as any)
+const SspNetworkRoute = SspNetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
   getParentRoute: () => SspRouteRoute,
 } as any)
 const SspOrganizationsRoute = SspOrganizationsRouteImport.update({
@@ -237,10 +250,15 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SspFestivalsIndexRoute = SspFestivalsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SspFestivalsRouteRoute,
+} as any)
 const SspFestivalsFestivalIdRoute = SspFestivalsFestivalIdRouteImport.update({
   id: '/$festivalId',
   path: '/$festivalId',
-  getParentRoute: () => SspFestivalsRoute,
+  getParentRoute: () => SspFestivalsRouteRoute,
 } as any)
 const AdminFestivalIdEventsEventIdRoute =
   AdminFestivalIdEventsEventIdRouteImport.update({
@@ -270,12 +288,14 @@ export interface FileRoutesByFullPath {
   '/sponsor': typeof SponsorRoute
   '/vendor': typeof VendorRoute
   '/admin/$festivalId': typeof AdminFestivalIdRouteRouteWithChildren
+  '/ssp/festivals': typeof SspFestivalsRouteRouteWithChildren
   '/f/$slug': typeof FSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/ssp/analytics': typeof SspAnalyticsRoute
   '/ssp/applications': typeof SspApplicationsRoute
-  '/ssp/festivals': typeof SspFestivalsRouteWithChildren
+  '/ssp/events': typeof SspEventsRoute
   '/ssp/login': typeof SspLoginRoute
+  '/ssp/network': typeof SspNetworkRoute
   '/ssp/organizations': typeof SspOrganizationsRoute
   '/ssp/users': typeof SspUsersRoute
   '/festivals/': typeof FestivalsIndexRoute
@@ -294,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/ssp/festivals/$festivalId': typeof SspFestivalsFestivalIdRoute
   '/admin/$festivalId/': typeof AdminFestivalIdIndexRoute
+  '/ssp/festivals/': typeof SspFestivalsIndexRoute
   '/admin/$festivalId/events/$eventId': typeof AdminFestivalIdEventsEventIdRoute
   '/admin/$festivalId/events/new': typeof AdminFestivalIdEventsNewRoute
 }
@@ -314,8 +335,9 @@ export interface FileRoutesByTo {
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/ssp/analytics': typeof SspAnalyticsRoute
   '/ssp/applications': typeof SspApplicationsRoute
-  '/ssp/festivals': typeof SspFestivalsRouteWithChildren
+  '/ssp/events': typeof SspEventsRoute
   '/ssp/login': typeof SspLoginRoute
+  '/ssp/network': typeof SspNetworkRoute
   '/ssp/organizations': typeof SspOrganizationsRoute
   '/ssp/users': typeof SspUsersRoute
   '/festivals': typeof FestivalsIndexRoute
@@ -334,6 +356,7 @@ export interface FileRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/ssp/festivals/$festivalId': typeof SspFestivalsFestivalIdRoute
   '/admin/$festivalId': typeof AdminFestivalIdIndexRoute
+  '/ssp/festivals': typeof SspFestivalsIndexRoute
   '/admin/$festivalId/events/$eventId': typeof AdminFestivalIdEventsEventIdRoute
   '/admin/$festivalId/events/new': typeof AdminFestivalIdEventsNewRoute
 }
@@ -353,12 +376,14 @@ export interface FileRoutesById {
   '/sponsor': typeof SponsorRoute
   '/vendor': typeof VendorRoute
   '/admin/$festivalId': typeof AdminFestivalIdRouteRouteWithChildren
+  '/ssp/festivals': typeof SspFestivalsRouteRouteWithChildren
   '/f/$slug': typeof FSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/ssp/analytics': typeof SspAnalyticsRoute
   '/ssp/applications': typeof SspApplicationsRoute
-  '/ssp/festivals': typeof SspFestivalsRouteWithChildren
+  '/ssp/events': typeof SspEventsRoute
   '/ssp/login': typeof SspLoginRoute
+  '/ssp/network': typeof SspNetworkRoute
   '/ssp/organizations': typeof SspOrganizationsRoute
   '/ssp/users': typeof SspUsersRoute
   '/festivals/': typeof FestivalsIndexRoute
@@ -377,6 +402,7 @@ export interface FileRoutesById {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/ssp/festivals/$festivalId': typeof SspFestivalsFestivalIdRoute
   '/admin/$festivalId/': typeof AdminFestivalIdIndexRoute
+  '/ssp/festivals/': typeof SspFestivalsIndexRoute
   '/admin/$festivalId/events/$eventId': typeof AdminFestivalIdEventsEventIdRoute
   '/admin/$festivalId/events/new': typeof AdminFestivalIdEventsNewRoute
 }
@@ -397,12 +423,14 @@ export interface FileRouteTypes {
     | '/sponsor'
     | '/vendor'
     | '/admin/$festivalId'
+    | '/ssp/festivals'
     | '/f/$slug'
     | '/festivals/$slug'
     | '/ssp/analytics'
     | '/ssp/applications'
-    | '/ssp/festivals'
+    | '/ssp/events'
     | '/ssp/login'
+    | '/ssp/network'
     | '/ssp/organizations'
     | '/ssp/users'
     | '/festivals/'
@@ -421,6 +449,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/ssp/festivals/$festivalId'
     | '/admin/$festivalId/'
+    | '/ssp/festivals/'
     | '/admin/$festivalId/events/$eventId'
     | '/admin/$festivalId/events/new'
   fileRoutesByTo: FileRoutesByTo
@@ -441,8 +470,9 @@ export interface FileRouteTypes {
     | '/festivals/$slug'
     | '/ssp/analytics'
     | '/ssp/applications'
-    | '/ssp/festivals'
+    | '/ssp/events'
     | '/ssp/login'
+    | '/ssp/network'
     | '/ssp/organizations'
     | '/ssp/users'
     | '/festivals'
@@ -461,6 +491,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/ssp/festivals/$festivalId'
     | '/admin/$festivalId'
+    | '/ssp/festivals'
     | '/admin/$festivalId/events/$eventId'
     | '/admin/$festivalId/events/new'
   id:
@@ -479,12 +510,14 @@ export interface FileRouteTypes {
     | '/sponsor'
     | '/vendor'
     | '/admin/$festivalId'
+    | '/ssp/festivals'
     | '/f/$slug'
     | '/festivals/$slug'
     | '/ssp/analytics'
     | '/ssp/applications'
-    | '/ssp/festivals'
+    | '/ssp/events'
     | '/ssp/login'
+    | '/ssp/network'
     | '/ssp/organizations'
     | '/ssp/users'
     | '/festivals/'
@@ -503,6 +536,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/ssp/festivals/$festivalId'
     | '/admin/$festivalId/'
+    | '/ssp/festivals/'
     | '/admin/$festivalId/events/$eventId'
     | '/admin/$festivalId/events/new'
   fileRoutesById: FileRoutesById
@@ -670,11 +704,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SspApplicationsRouteImport
       parentRoute: typeof SspRouteRoute
     }
+    '/ssp/events': {
+      id: '/ssp/events'
+      path: '/events'
+      fullPath: '/ssp/events'
+      preLoaderRoute: typeof SspEventsRouteImport
+      parentRoute: typeof SspRouteRoute
+    }
     '/ssp/festivals': {
       id: '/ssp/festivals'
       path: '/festivals'
       fullPath: '/ssp/festivals'
-      preLoaderRoute: typeof SspFestivalsRouteImport
+      preLoaderRoute: typeof SspFestivalsRouteRouteImport
       parentRoute: typeof SspRouteRoute
     }
     '/ssp/login': {
@@ -682,6 +723,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/ssp/login'
       preLoaderRoute: typeof SspLoginRouteImport
+      parentRoute: typeof SspRouteRoute
+    }
+    '/ssp/network': {
+      id: '/ssp/network'
+      path: '/network'
+      fullPath: '/ssp/network'
+      preLoaderRoute: typeof SspNetworkRouteImport
       parentRoute: typeof SspRouteRoute
     }
     '/ssp/organizations': {
@@ -789,12 +837,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ssp/festivals/': {
+      id: '/ssp/festivals/'
+      path: '/'
+      fullPath: '/ssp/festivals/'
+      preLoaderRoute: typeof SspFestivalsIndexRouteImport
+      parentRoute: typeof SspFestivalsRouteRoute
+    }
     '/ssp/festivals/$festivalId': {
       id: '/ssp/festivals/$festivalId'
       path: '/$festivalId'
       fullPath: '/ssp/festivals/$festivalId'
       preLoaderRoute: typeof SspFestivalsFestivalIdRouteImport
-      parentRoute: typeof SspFestivalsRoute
+      parentRoute: typeof SspFestivalsRouteRoute
     }
     '/admin/$festivalId/events/$eventId': {
       id: '/admin/$festivalId/events/$eventId'
@@ -813,33 +868,38 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface SspFestivalsRouteChildren {
+interface SspFestivalsRouteRouteChildren {
   SspFestivalsFestivalIdRoute: typeof SspFestivalsFestivalIdRoute
+  SspFestivalsIndexRoute: typeof SspFestivalsIndexRoute
 }
 
-const SspFestivalsRouteChildren: SspFestivalsRouteChildren = {
+const SspFestivalsRouteRouteChildren: SspFestivalsRouteRouteChildren = {
   SspFestivalsFestivalIdRoute: SspFestivalsFestivalIdRoute,
+  SspFestivalsIndexRoute: SspFestivalsIndexRoute,
 }
 
-const SspFestivalsRouteWithChildren = SspFestivalsRoute._addFileChildren(
-  SspFestivalsRouteChildren,
-)
+const SspFestivalsRouteRouteWithChildren =
+  SspFestivalsRouteRoute._addFileChildren(SspFestivalsRouteRouteChildren)
 
 interface SspRouteRouteChildren {
+  SspFestivalsRouteRoute: typeof SspFestivalsRouteRouteWithChildren
   SspAnalyticsRoute: typeof SspAnalyticsRoute
   SspApplicationsRoute: typeof SspApplicationsRoute
-  SspFestivalsRoute: typeof SspFestivalsRouteWithChildren
+  SspEventsRoute: typeof SspEventsRoute
   SspLoginRoute: typeof SspLoginRoute
+  SspNetworkRoute: typeof SspNetworkRoute
   SspOrganizationsRoute: typeof SspOrganizationsRoute
   SspUsersRoute: typeof SspUsersRoute
   SspIndexRoute: typeof SspIndexRoute
 }
 
 const SspRouteRouteChildren: SspRouteRouteChildren = {
+  SspFestivalsRouteRoute: SspFestivalsRouteRouteWithChildren,
   SspAnalyticsRoute: SspAnalyticsRoute,
   SspApplicationsRoute: SspApplicationsRoute,
-  SspFestivalsRoute: SspFestivalsRouteWithChildren,
+  SspEventsRoute: SspEventsRoute,
   SspLoginRoute: SspLoginRoute,
+  SspNetworkRoute: SspNetworkRoute,
   SspOrganizationsRoute: SspOrganizationsRoute,
   SspUsersRoute: SspUsersRoute,
   SspIndexRoute: SspIndexRoute,

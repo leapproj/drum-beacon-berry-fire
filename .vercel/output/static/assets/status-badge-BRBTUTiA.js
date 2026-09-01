@@ -1,0 +1,1 @@
+import{o as e}from"./useStore-DCim0WvV.js";import{n as t,t as n}from"./badge-CRFypmTB.js";var r=e();function i({status:e}){return(0,r.jsx)(n,{tone:t(e),children:e})}export{i as t};

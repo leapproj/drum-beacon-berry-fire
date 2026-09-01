@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { HqOperatorStrip } from "@/components/hq-chrome";
 import { OperatorGate, useOperatorProfile } from "@/components/operator-gate";
 import { TopBar } from "@/components/shell";
 
@@ -22,9 +23,10 @@ function AdminChrome({
   params: { festivalId: string };
 }) {
   const profile = useOperatorProfile();
+  const hq = profile?.kind === "ssp";
   const items = [
     { to: "/hub", label: "Desk" },
-    ...(profile?.kind === "ssp" ? [{ to: "/ssp", label: "SSP" }] : []),
+    ...(hq ? [{ to: "/ssp", label: "Back to HQ" }] : []),
     { to: "/admin/$festivalId", params: p, label: "Command" },
     { to: "/admin/$festivalId/planning", params: p, label: "Plan" },
     { to: "/admin/$festivalId/events", params: p, label: "Events" },
@@ -40,7 +42,11 @@ function AdminChrome({
   void festivalId;
   return (
     <div className="min-h-screen">
-      <TopBar kicker="Command center" items={items} />
+      <TopBar
+        kicker={hq ? "HQ · Command center" : "Command center"}
+        items={items}
+        trailing={hq ? <HqOperatorStrip /> : undefined}
+      />
       <Outlet />
     </div>
   );

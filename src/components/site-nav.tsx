@@ -58,6 +58,10 @@ export function SiteFooter() {
           <a href="https://tukodph.com" className="text-fg underline-offset-4 hover:underline">
             tukodph.com
           </a>
+          {" · "}
+          <Link to="/ssp/login" className="text-fg underline-offset-4 hover:underline">
+            Headquarters
+          </Link>
         </p>
       </div>
     </footer>

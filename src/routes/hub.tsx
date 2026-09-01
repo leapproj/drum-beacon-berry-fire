@@ -53,7 +53,7 @@ function Hub() {
   const items = ssp
     ? [
         { to: "/hub", label: "Desk" },
-        { to: "/ssp", label: "SSP" },
+        { to: "/ssp", label: "HQ" },
       ]
     : [{ to: "/hub", label: "Desk" }];
 
@@ -66,7 +66,7 @@ function Hub() {
           title={ssp ? "All tenants" : "Your command center"}
           description={
             ssp
-              ? "View every festival tenant. Open SSP to control the platform, or open a command center as co-partner."
+              ? "View every festival tenant. Open Headquarters to control the platform, or open a command center as co-partner."
               : "Create, draft, organize, and publish your festivals. You only see desks you own."
           }
           actions={

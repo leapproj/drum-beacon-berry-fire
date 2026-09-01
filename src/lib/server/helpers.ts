@@ -110,6 +110,18 @@ export async function requireSsp(sql: Sql, userId: string) {
   throw new Error("SSP access required");
 }
 
+export async function grantSspOperators(sql: Sql, festivalId: string) {
+  const ops = await sql.query<{ id: string }>(
+    `select id from operator_accounts where kind = 'ssp'`,
+  );
+  for (const op of ops) {
+    await sql.query(
+      `insert into festival_members (festival_id, user_id, role) values ($1,$2,'admin') on conflict do nothing`,
+      [festivalId, op.id],
+    );
+  }
+}
+
 export async function requireFestivalMember(sql: Sql, userId: string, festivalId: string) {
   const acc = await sql.query<{ kind: string }>(
     `select kind from operator_accounts where id = $1`,

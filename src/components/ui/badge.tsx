@@ -33,6 +33,6 @@ export function statusTone(status: string) {
   if (s === "SETUP" || s === "WARN") return "setup" as const;
   if (s === "DRAFT") return "draft" as const;
   if (s === "PLANNING" || s === "COMPLETED") return "planning" as const;
-  if (s === "INVALID" || s === "REVOKED") return "danger" as const;
+  if (s === "ENDED" || s === "REJECTED") return "danger" as const;
   return "default" as const;
 }
